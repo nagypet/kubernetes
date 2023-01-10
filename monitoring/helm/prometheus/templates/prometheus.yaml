@@ -1,0 +1,62 @@
+#-----------------------------------------------------------------------------------------------------------------------
+# Service
+#-----------------------------------------------------------------------------------------------------------------------
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    prometheus: prometheus
+  name: prometheus-service
+  namespace: {{ .Release.Namespace }}
+spec:
+  type: ClusterIP
+  ports:
+  - name: http
+    protocol: TCP
+    port: 9090
+    targetPort: 9090
+  selector:
+    prometheus: prometheus
+---
+#-----------------------------------------------------------------------------------------------------------------------
+# Prometheus
+#-----------------------------------------------------------------------------------------------------------------------
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: prometheus
+  namespace: {{ .Release.Namespace }}
+  labels:
+    prometheus: k8s
+spec:
+  externalLabels:
+    cluster: k8s-test
+  replicas: 1
+  serviceAccountName: prometheus-{{ .Release.Namespace }}
+  serviceMonitorSelector:
+    matchLabels:
+      servicemonitor: spring-services
+---
+#-----------------------------------------------------------------------------------------------------------------------
+# Ingress
+#-----------------------------------------------------------------------------------------------------------------------
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: prometheus-ingress
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: prometheus.{{ .Release.Namespace }}.k8s-test.perit.hu
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: prometheus-service
+            port:
+              name: http

@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: wstemplate-apps
+  namespace: {{ .Release.Namespace }}
+  labels:
+    servicemonitor: spring-services
+spec:
+  selector:
+    matchLabels:
+      monitored: prometheus
+  endpoints:
+  - port: http
+    interval: 15s
+    path: /actuator/prometheus
