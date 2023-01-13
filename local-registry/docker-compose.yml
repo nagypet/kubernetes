@@ -1,0 +1,20 @@
+#docker compose for local development
+
+version: '3.6'
+
+
+services: 
+    
+    #####################################################################################                 
+    registry:
+    #####################################################################################                 
+        container_name: registry
+        image: registry:2
+        restart: always
+        ports:
+            - 5000:5000
+        volumes:
+            - registry:/var/lib/registry
+  
+volumes:
+    registry:
