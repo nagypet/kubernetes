@@ -9,8 +9,8 @@ Then you can use these helm charts to install prometheus/grafana in the given na
 
 URLs:
 
-- http://prometheus.wstemplate.k8s-test.perit.hu
-- http://grafana.wstemplate.k8s-test.perit.hu
+- http://prometheus.wstemplate.k8s-test.perit.local
+- http://grafana.wstemplate.k8s-test.perit.local
 
 Please make sure, the service has the label `monitored: prometheus` and the port is named as http.
 

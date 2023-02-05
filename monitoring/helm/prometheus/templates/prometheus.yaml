@@ -50,7 +50,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: prometheus.{{ .Release.Namespace }}.k8s-test.perit.hu
+  - host: prometheus.{{ .Release.Namespace }}.k8s-test.perit.local
     http:
       paths:
       - path: /

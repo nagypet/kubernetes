@@ -85,7 +85,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: grafana.{{ .Release.Namespace }}.k8s-test.perit.hu
+  - host: grafana.{{ .Release.Namespace }}.k8s-test.perit.local
     http:
       paths:
       - path: /

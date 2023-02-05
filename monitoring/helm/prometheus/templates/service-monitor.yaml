@@ -1,7 +1,7 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: wstemplate-apps
+  name: apps
   namespace: {{ .Release.Namespace }}
   labels:
     servicemonitor: spring-services
