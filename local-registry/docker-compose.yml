@@ -16,6 +16,8 @@ services:
       - REGISTRY_STORAGE_DELETE_ENABLED=true
     volumes:
       - registry:/var/lib/registry
+      - ./registry-config/simple.yml:/etc/docker/registry/config.yml
+
 
   #####################################################################################
   registry-ui:
@@ -35,6 +37,22 @@ services:
     restart: always
     depends_on:
       - registry
+
+
+  #####################################################################################
+  registry-ui2:
+  #####################################################################################
+    image: joxit/docker-registry-ui:latest
+    ports:
+      - 8087:80
+    environment:
+      - REGISTRY_TITLE=perit.local
+      - REGISTRY_URL=http://docker-registry:5000
+      - SINGLE_REGISTRY=true
+      - DELETE_IMAGES=true
+    depends_on:
+      - registry
+
 
 volumes:
   registry:
