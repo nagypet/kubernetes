@@ -1,7 +1,7 @@
-# kubernetes
+# Kubernetes
 
 <!-- TOC -->
-* [kubernetes](#kubernetes)
+* [Kubernetes](#kubernetes)
   * [Let's encrypt integration](#lets-encrypt-integration)
   * [Microk8s dashboard](#microk8s-dashboard)
     * [Accessing with port forward](#accessing-with-port-forward)
