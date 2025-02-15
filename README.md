@@ -2,6 +2,10 @@
 
 Please install the [prometheus-operator](https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/user-guides/getting-started.md) first.
 
+```
+helm install kube-prom-stack prometheus-community/kube-prometheus-stack -n observability
+```
+
 Then you can use these helm charts to install prometheus/grafana in the given namespace.
 
 - `helm install prometheus prometheus -n wstemplate`
